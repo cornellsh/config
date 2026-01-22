@@ -2,7 +2,7 @@
 
 Minimalist configuration for **Zsh**, **Tmux**, and **Starship**.
 
-![Preview](https://i.imgur.com/A2KgzQe.png)
+![Preview](https://i.imgur.com/QKOnbeO.png)
 
 ## Install
 
