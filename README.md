@@ -1,48 +1,49 @@
-# Minimalist Linux Config (Tmux + Zsh + Starship)
+# Config
 
-A highly optimized, aesthetic configuration for Linux environments. Features a "Vibrant Pastel / OLED Black" theme for Tmux and a minimalist high-performance prompt via Starship.
+Minimalist configuration for **Zsh**, **Tmux**, and **Starship**.
 
-## Preview
+![Preview](https://i.imgur.com/A2KgzQe.png)
 
-![Terminal Preview](https://i.imgur.com/A2KgzQe.png)
+## Install
 
-**Tmux Theme:**
-- **Style:** OLED Black bar with vibrant pastel accents (Pink/Lavender/Mint).
-- **Interactive:**
-    - Prefix (`Ctrl+a`) turns the session indicator **Pink**.
-    - Zoomed panes display a **Star (★)**.
-    - Active windows are highlighted as solid Lavender tabs.
-
-## Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/cornellsh/config.git ~/work/config
-   ```
-
-2. Run the setup script:
-   ```bash
-   cd ~/work/config
-   chmod +x install.sh
-   ./install.sh
-   ```
+```bash
+git clone https://github.com/cornellsh/config.git ~/.config/cfg
+cd ~/.config/cfg && chmod +x install.sh && ./install.sh
+```
 
 ## Dependencies
-The script will attempt to install these, but you should ensure you have:
-- `zsh`
-- `tmux` (>= 3.0)
-- `curl`
-- `git`
-- `starship` (installed automatically by script if missing)
+- `zsh`, `tmux`, `starship`, `git`, `curl`
+- *Optional:* `eza`, `bat`, `zoxide`, `fzf`, `ripgrep`
 
-## Keybindings (Tmux)
+## Keybinds
 
+### Tmux (`Ctrl+a` Prefix)
 | Key | Action |
 | :--- | :--- |
-| `Ctrl+a` | **Prefix** |
-| `r` | Reload Config |
-| `v` | Split Vertical |
-| `s` | Split Horizontal |
-| `h/j/k/l` | Navigate Panes (Vim style) |
-| `z` | Zoom Pane |
-| `[` | Copy Mode |
+| `r` | Reload config |
+| `v` / `s` | Split Vertical / Horizontal |
+| `h/j/k/l` | Navigate panes |
+| `c` | New window |
+| `z` | Zoom pane |
+| `x` / `X` | Kill pane / window |
+| `[` | Copy mode (Vim keys) |
+
+### Zsh Aliases
+| Alias | Command |
+| :--- | :--- |
+| `l` | `ls -lah` (or `eza`) |
+| `..` | `cd ..` |
+| `gs` | `git status` |
+| `ga` | `git add` |
+| `gc` | `git commit -m` |
+| `gp` | `git push` |
+| `gl` | `git pull` |
+| `t` | `tmux` |
+| `ta` | `tmux attach -t` |
+
+### Zsh Shortcuts
+| Key | Action |
+| :--- | :--- |
+| `Ctrl + →` | Forward word |
+| `Ctrl + ←` | Backward word |
+| `Home` / `End` | Start / End of line |
