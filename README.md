@@ -1,50 +1,45 @@
-# Config
+# dotfiles // cornell.sh
 
-Minimalist configuration for **Zsh**, **Tmux**, and **Starship**.
+High-vibrancy, text-based terminal environment. No icons, no noise.
+Optimized for **Zsh**, **Tmux**, and **Starship**.
 
-![Preview](https://i.imgur.com/QKOnbeO.png)
+## Aesthetic
+- **Palette:** Vibrant OLED (Purple/Pink/Cyan on Black).
+- **Style:** Text-only HUD. No patched fonts required.
+- **Tmux:** Minimal bottom bar, `cornell.sh` branding.
+- **Prompt:** Single-line, explicit git status labels (e.g., `modified`, `ahead:1`).
 
-## Install
+## Setup
 
 ```bash
-git clone https://github.com/cornellsh/config.git ~/.config/cfg
-cd ~/.config/cfg && chmod +x install.sh && ./install.sh
+git clone https://github.com/cornellsh/config.git ~/work/config
+cd ~/work/config
+./install.sh
 ```
 
-## Dependencies
-- `zsh`, `tmux`, `starship`, `git`, `curl`
-- *Optional:* `eza`, `bat`, `zoxide`, `fzf`, `ripgrep`
+## Stack
+- **Shell:** Zsh + Autosuggestions + Syntax Highlighting
+- **Prompt:** Starship (Custom text-based config)
+- **Multiplexer:** Tmux (3.0+)
+- **Utils:** `eza`, `bat`, `zoxide`, `fzf`, `ripgrep`
 
-## Keybinds
+## Controls
 
 ### Tmux (`Ctrl+a` Prefix)
 | Key | Action |
 | :--- | :--- |
 | `r` | Reload config |
+| `b` | Toggle status bar |
 | `v` / `s` | Split Vertical / Horizontal |
-| `h/j/k/l` | Navigate panes |
-| `H/J/K/L` | Resize panes (Shift + key) |
-| `c` | New window |
-| `z` | Zoom pane |
-| `x` / `X` | Kill pane / window |
-| `[` | Copy mode (Vim keys) |
+| `h` `j` `k` `l` | Navigate panes |
+| `H` `J` `K` `L` | Resize panes |
+| `C-l` | Clear screen & scrollback |
 
-### Zsh Aliases
+### Shell
 | Alias | Command |
 | :--- | :--- |
-| `l` | `ls -lah` (or `eza`) |
-| `..` | `cd ..` |
-| `gs` | `git status` |
-| `ga` | `git add` |
-| `gc` | `git commit -m` |
-| `gp` | `git push` |
-| `gl` | `git pull` |
-| `t` | `tmux` |
-| `ta` | `tmux attach -t` |
-
-### Zsh Shortcuts
-| Key | Action |
-| :--- | :--- |
-| `Ctrl + →` | Forward word |
-| `Ctrl + ←` | Backward word |
-| `Home` / `End` | Start / End of line |
+| `l` / `ll` | List files (detailed) |
+| `g` / `gs` | Git / Git Status |
+| `cp` / `mv` | Copy/Move (Interactive) |
+| `G` | Global grep (`| grep`) |
+| `L` | Global pager (`| less`) |

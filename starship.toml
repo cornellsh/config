@@ -1,5 +1,6 @@
-# Vibrant Pastel / Text-Only Starship Config
+# Vibrant Pastel / Single-Line Explicit Text Config
 
+# Single line format for a more compact look
 format = """
 $username\
 $hostname\
@@ -15,10 +16,9 @@ $docker_context\
 $memory_usage\
 $cmd_duration\
 $jobs\
-$line_break\
 $character"""
 
-add_newline = true
+add_newline = false
 
 # Palette: Vibrant Pastels
 [palettes.vibrant_oled]
@@ -40,37 +40,40 @@ show_always = false
 
 [hostname]
 ssh_only = true
-format = "on [$hostname](bold #be95ff) "
+format = "@[$hostname](bold #be95ff) "
 disabled = false
 
 [character]
-success_symbol = "[>>](bold #ff7eb6)"
-error_symbol = "[>>](bold #ff5555)"
-vimcmd_symbol = "[<<](bold #42be65)"
+success_symbol = "[>>](bold #ff7eb6) "
+error_symbol = "[>>](bold #ff5555) "
 
 [directory]
 style = "bold #82cfff"
 format = "[$path]($style) "
 truncation_length = 3
 truncation_symbol = "../"
-read_only = " [ro]"
+read_only = " [RO]"
 [directory.substitutions]
 "~/work" = "work"
 
 [git_branch]
 symbol = "git:"
 style = "bold #be95ff"
-format = "on [$symbol$branch]($style) "
+format = "[$symbol$branch]($style) "
 
 [git_status]
 style = "bold #ff5555"
 format = '([$all_status$ahead_behind]($style) )'
+# Explicit word-based status (plain text to avoid parser errors)
 ahead = "ahead:${count}"
 behind = "behind:${count}"
-diverged = "div:^${ahead_count}v${behind_count}"
-modified = "!"
-stashed = "$"
-deleted = "x"
+diverged = "diverged:^${ahead_count}v${behind_count}"
+modified = "modified "
+stashed = "stashed "
+deleted = "deleted "
+renamed = "renamed "
+untracked = "untracked "
+conflicted = "conflict "
 
 [git_metrics]
 disabled = false
@@ -81,34 +84,34 @@ format = "([+$added]($added_style) )([-$deleted]($deleted_style) )"
 [memory_usage]
 disabled = false
 threshold = 85
-symbol = "mem: "
+symbol = "mem:"
 style = "bold #ff5555"
 format = "[$symbol${ram}]($style) "
 
 [nodejs]
-symbol = "node "
+symbol = "node:"
 style = "#42be65"
-format = "via [$symbol($version )]($style)"
+format = "[$symbol$version]($style) "
 
 [rust]
-symbol = "rust "
+symbol = "rust:"
 style = "#ff5555"
-format = "via [$symbol($version )]($style)"
+format = "[$symbol$version]($style) "
 
 [golang]
-symbol = "go "
+symbol = "go:"
 style = "#82cfff"
-format = "via [$symbol($version )]($style)"
+format = "[$symbol$version]($style) "
 
 [python]
-symbol = "py "
+symbol = "py:"
 style = "#ffe97b"
-format = "via [$symbol($version )]($style)"
+format = "[$symbol$version]($style) "
 
 [docker_context]
-symbol = "docker "
+symbol = "docker:"
 style = "#82cfff"
-format = "at [$symbol$context]($style) "
+format = "[$symbol$context]($style) "
 
 [cmd_duration]
 min_time = 2_000
