@@ -1,13 +1,7 @@
 # dotfiles // cornell.sh
 
-High-vibrancy, text-based terminal environment. No icons, no noise.
+High-vibrancy, text-based terminal environment.
 Optimized for **Zsh**, **Tmux**, and **Starship**.
-
-## Aesthetic
-- **Palette:** Vibrant OLED (Purple/Pink/Cyan on Black).
-- **Style:** Text-only HUD. No patched fonts required.
-- **Tmux:** Minimal bottom bar, `cornell.sh` branding.
-- **Prompt:** Single-line, explicit git status labels (e.g., `modified`, `ahead:1`).
 
 ## Setup
 
@@ -17,7 +11,7 @@ cd ~/work/config
 ./install.sh
 ```
 
-## Stack
+## Setup
 - **Shell:** Zsh + Autosuggestions + Syntax Highlighting
 - **Prompt:** Starship (Custom text-based config)
 - **Multiplexer:** Tmux (3.0+)
