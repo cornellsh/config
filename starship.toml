@@ -4,11 +4,14 @@ format = """
 $directory\
 $git_branch\
 $git_status\
+$git_metrics\
 $nodejs\
 $rust\
 $golang\
 $python\
 $docker_context\
+$cmd_duration\
+$jobs\
 $line_break\
 $character"""
 
@@ -46,6 +49,11 @@ format = "on [$symbol$branch]($style) "
 style = "bold #ff5555"
 format = '([$all_status$ahead_behind]($style) )'
 
+[git_metrics]
+disabled = false
+added_style = "bold #42be65"
+deleted_style = "bold #ff5555"
+
 [nodejs]
 symbol = " "
 style = "#42be65"
@@ -70,6 +78,15 @@ format = "via [$symbol($version )]($style)"
 symbol = " "
 style = "#82cfff"
 format = "at [$symbol$context]($style) "
+
+[cmd_duration]
+min_time = 2_000
+format = "took [$duration](bold #ffe97b) "
+
+[jobs]
+symbol = " "
+style = "bold #ff5555"
+format = "[$symbol$number]($style) "
 
 [package]
 disabled = true
