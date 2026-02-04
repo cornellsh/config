@@ -6,23 +6,23 @@ BLUE='\033[0;34m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-echo -e "${BLUE}Starting Config Setup...${NC}"
+echo -e "${BLUE}[INFO] Starting Config Setup...${NC}"
 
 # 1. Function to check and install dependencies
 check_dependency() {
     if ! command -v $1 &> /dev/null; then
-        echo -e "${YELLOW}$1 is not installed.${NC}"
+        echo -e "${YELLOW}[WARN] $1 is not installed.${NC}"
         if [ -f /etc/debian_version ]; then
-            echo "Attempting to install $1 via apt..."
+            echo "[INFO] Attempting to install $1 via apt..."
             sudo apt-get update && sudo apt-get install -y $1
 elif [ -f /etc/arch-release ]; then
-            echo "Attempting to install $1 via pacman..."
+            echo "[INFO] Attempting to install $1 via pacman..."
             sudo pacman -S --noconfirm $1
 else
-            echo -e "${YELLOW}Please install $1 manually.${NC}"
+            echo -e "${YELLOW}[WARN] Please install $1 manually.${NC}"
         fi
     else
-        echo -e "${GREEN}✓ $1 is installed${NC}"
+        echo -e "${GREEN}[OK] $1 is installed${NC}"
     fi
 }
 
@@ -34,10 +34,10 @@ check_dependency "curl"
 
 # 2. Install Starship if missing
 if ! command -v starship &> /dev/null; then
-    echo -e "${BLUE}Installing Starship prompt...${NC}"
+    echo -e "${BLUE}[INFO] Installing Starship prompt...${NC}"
     curl -sS https://starship.rs/install.sh | sh -s -- -y
 else
-    echo -e "${GREEN}✓ Starship is installed${NC}"
+    echo -e "${GREEN}[OK] Starship is installed${NC}"
 fi
 
 # 3. Backup and Symlink Function
@@ -52,15 +52,15 @@ backup_and_link() {
     if [ -f "$dest" ] || [ -L "$dest" ]; then
         # Check if it's already the correct link
         if [ "$(readlink -f "$dest")" == "$(readlink -f "$src")" ]; then
-            echo -e "${GREEN}✓ $filename is already linked correctly.${NC}"
+            echo -e "${GREEN}[OK] $filename is already linked correctly.${NC}"
             return
         fi
         
-        echo -e "${YELLOW}Backing up existing $filename to ${filename}.backup${NC}"
+        echo -e "${YELLOW}[WARN] Backing up existing $filename to ${filename}.backup${NC}"
         mv "$dest" "${dest}.backup"
     fi
 
-    echo -e "${BLUE}Linking $filename...${NC}"
+    echo -e "${BLUE}[INFO] Linking $filename...${NC}"
     ln -s "$src" "$dest"
 }
 
@@ -74,10 +74,10 @@ backup_and_link "$CONFIG_DIR/starship.toml" "$HOME/.config/starship.toml"
 
 # 5. WSL Specific Setup
 if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null ; then
-    echo -e "\n${BLUE}WSL Environment Detected...${NC}"
-    echo -e "Running WSL optimizations..."
+    echo -e "\n${BLUE}[INFO] WSL Environment Detected...${NC}"
+    echo -e "[INFO] Running WSL optimizations..."
     bash "$CONFIG_DIR/wsl-setup.sh"
 fi
 
-echo -e "\n${GREEN}Setup Complete!${NC}"
+echo -e "\n${GREEN}[OK] Setup Complete!${NC}"
 echo -e "Please restart your shell or run: ${BLUE}source ~/.zshrc${NC}"
