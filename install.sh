@@ -31,6 +31,7 @@ check_dependency "git"
 check_dependency "tmux"
 check_dependency "zsh"
 check_dependency "curl"
+check_dependency "ghostty" # Added Ghostty dependency check
 
 # 1.1 Install Zsh Plugins (Autosuggestions & Syntax Highlighting)
 echo -e "${BLUE}[INFO] Checking Zsh plugins...${NC}"
@@ -95,6 +96,13 @@ CONFIG_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 backup_and_link "$CONFIG_DIR/.tmux.conf" "$HOME/.tmux.conf"
 backup_and_link "$CONFIG_DIR/.zshrc" "$HOME/.zshrc"
 backup_and_link "$CONFIG_DIR/starship.toml" "$HOME/.config/starship.toml"
+
+# 4.1. Ghostty Configuration
+echo -e "\n${BLUE}[INFO] Configuring Ghostty terminal...${NC}"
+mkdir -p "$HOME/.config/ghostty/themes"
+
+backup_and_link "$CONFIG_DIR/ghostty/config" "$HOME/.config/ghostty/config"
+backup_and_link "$CONFIG_DIR/ghostty/themes/cornellsh.conf" "$HOME/.config/ghostty/themes/cornellsh.conf"
 
 # 5. OpenCode Configuration (optional)
 if [ -f "$CONFIG_DIR/opencode.json" ]; then
