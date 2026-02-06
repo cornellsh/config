@@ -104,6 +104,15 @@ mkdir -p "$HOME/.config/ghostty/themes"
 backup_and_link "$CONFIG_DIR/ghostty/config" "$HOME/.config/ghostty/config"
 backup_and_link "$CONFIG_DIR/ghostty/themes/cornellsh.conf" "$HOME/.config/ghostty/themes/cornellsh.conf"
 
+# 4.2. DankMaterialShell Configuration
+echo -e "\n${BLUE}[INFO] Configuring DankMaterialShell...${NC}"
+mkdir -p "$HOME/.config/DankMaterialShell"
+mkdir -p "$HOME/Documents/DankMaterialShell" # For custom theme file
+
+backup_and_link "$CONFIG_DIR/dankmaterialshell/settings.json" "$HOME/.config/DankMaterialShell/settings.json"
+cp "$CONFIG_DIR/dankmaterialshell/cornellsh.json" "$HOME/Documents/DankMaterialShell/cornellsh.json"
+echo -e "${GREEN}[OK] DankMaterialShell custom theme copied.${NC}"
+
 # 5. OpenCode Configuration (optional)
 if [ -f "$CONFIG_DIR/opencode.json" ]; then
     echo -e "\n${BLUE}[INFO] OpenCode config found.${NC}"
