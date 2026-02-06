@@ -1,76 +1,155 @@
-# unix-config: A Polished, Consistent Linux Configuration
+# unix-config
 
-This repository holds my personal dotfiles and configuration for a streamlined Linux environment. The goal is to provide a clean, efficient, and visually consistent setup across different machines, whether it's my Arch Linux notebook or a WSL2 instance. Expect a refined terminal experience with a focus on usability and aesthetics.
+Personal dotfiles and configuration for reproducing my Linux environment across machines. I use this setup on Arch Linux (Intel 12th Gen notebook) and WSL2.
 
-## What You'll Find
+## What's Included
 
-Everything here is configured with a few core ideas in mind:
+- **Zsh** (.zshrc): Shell configuration with history sharing, auto-cd, and modern tool aliases (eza, bat, ripgrep)
+- **Starship Prompt** (starship.toml): Single-line prompt with git status, language versions, command duration
+- **Tmux** (.tmux.conf): Terminal multiplexer with Ctrl+a prefix, Vim-style navigation, and OLED-optimized colors
+- **Ghostty Terminal** (~/.config/ghostty): Terminal config with cornellsh theme, 12pt font
+- **DankMaterialShell** (~/.config/DankMaterialShell): Wayland shell with cornellsh theme integration
+- **OpenCode** (~/.config/opencode): AI coding assistant config with cornell.sh theme and auto-permissions
+- **Notebook Setup** (setup_notebook.sh): Power management for Intel 12th Gen (TLP, thermald, ZRAM)
+- **WSL2 Setup** (wsl-setup.sh): Windows Subsystem for Linux optimizations
 
--   **Performance:** Keeping things fast and responsive, minimizing resource usage.
--   **Visual Consistency:** A unified `cornellsh` theme ties the look and feel together across all applications.
--   **OLED-Friendly:** Optimized for OLED displays with true black backgrounds and vibrant, yet subtle, pastel colors.
--   **Practical Defaults:** Sensible settings and useful tools without getting in your way.
+All tools use the cornellsh theme: true black (#000000) backgrounds with pastel accents. This looks good on OLED screens and saves power.
 
-### Components & Highlights:
-
-#### **Zsh** (`.zshrc`)
-Your command line, supercharged.
--   **Smart Suggestions:** Autocomplete commands as you type with history and completion strategies.
--   **Syntax Highlighting:** Instant visual feedback for commands, preventing typos.
--   **Modern Aliases:** Shortcuts for powerful tools like `eza` (modern `ls`), `bat` (modern `cat`), `zoxide` (smarter `cd`), `fzf` (fuzzy finder), and `ripgrep` (blazing-fast `grep`).
--   **Shared History:** Seamlessly access your command history across all sessions.
-
-#### **Starship Prompt** (`starship.toml`)
-A minimalist, yet informative prompt.
--   **Single Line Efficiency:** Saves vertical screen space for your commands.
--   **Context-Aware:** Displays crucial information only when relevant:
-    -   `username@hostname` (SSH sessions only)
-    -   Current Git branch and status
-    -   Active language versions (Node.js, Rust, Go, Python)
-    -   Memory usage (configurable threshold)
-    -   Command duration
--   **Vibrant `cornellsh` Colors:** Beautiful pastel colors on a true black background for an OLED-optimized look.
-
-#### **Tmux** (`.tmux.conf`)
-Your persistent, multi-pane workspace.
--   **Familiar Prefix:** Uses `Ctrl+a` (instead of `Ctrl+b`) for muscle memory.
--   **Intuitive Navigation:** Vim-style `h/j/k/l` for quick pane switching.
--   **Informative Status Bar:** Always see the time, active session name, and other useful indicators.
--   **Quick Reload:** Hit `Prefix + r` to instantly apply config changes.
-
-#### **Ghostty Terminal** (`~/.config/ghostty/*`)
-A fast, modern GPU-accelerated terminal.
--   **OLED-Optimized `cornellsh` Theme:** True black background and carefully selected pastel colors for crisp text and power efficiency.
--   Seamless integration with your shell and prompt.
-
-#### **DankMaterialShell** (`~/.config/DankMaterialShell/*`, `~/Documents/DankMaterialShell/cornellsh.json`)
-A dynamic shell experience, now with consistent theming.
--   **Custom `cornellsh.json` Theme:** Ensures UI elements, popups, and widgets align with the overall `cornellsh` aesthetic, featuring OLED-optimized colors.
-
-#### **OpenCode** (`~/.config/opencode/*`)
-Your coding companion, visually consistent.
--   **`cornell.sh` Theme:** Matches your terminal and shell for a harmonious coding environment.
--   Pre-configured plugins for Gemini AI features and an enhanced skill system.
--   Permission setup allowing seamless operations without constant prompts.
-
-### Ready to Install?
-
-Getting set up is straightforward. The `install.sh` script automates most of the heavy lifting for you.
+## Installation
 
 ```bash
-git clone https://github.com/cornellsh/unix-config ~/my_dotfiles # or wherever you prefer
+git clone https://github.com/cornellsh/unix-config ~/my_dotfiles
 cd ~/my_dotfiles
 ./install.sh
 ```
 
--   **Safe:** Existing configuration files are automatically backed up to `~/.config-backup/` before symlinking.
--   **Smart:** The script detects your OS (Arch/Debian) to install dependencies and handles WSL2-specific optimizations if needed.
+The install script:
+- Detects your OS (Arch or Debian/Ubuntu) and installs dependencies via apt/pacman
+- Backs up existing configs to `.backup` files before symlinking
+- Installs: git, tmux, zsh, curl, ghostty, zsh-autosuggestions, zsh-syntax-highlighting, starship
+- Asks about WSL2 optimizations if running in WSL
+- Asks about OpenCode theme installation
 
-### Special Notes for WSL2 Users
+After installation, restart your shell or run `source ~/.zshrc`.
 
-If you're running on WSL2, our script offers specific tweaks to enhance your experience:
+## Components
 
--   **Time Drift Fix:** Disables `systemd-timesyncd` to prevent annoying clock drift.
--   **Performance & Resource Management:** Configures `/etc/wsl.conf` for optimized filesystem performance and creates `.wslconfig` to limit WSL RAM/CPU usage, ensuring a smoother ride.
+### Zsh
 
-Give it a try! If you find this configuration useful, consider giving the repo a star. Your feedback is always welcome!
+- History: 50,000 lines, shared across sessions, ignores duplicates and space-prefixed commands
+- Autocomplete: Case-insensitive with caching, fuzzy matching
+- Keybindings: Emacs mode with Ctrl+Left/Right for word navigation
+- Aliases: g=git, t=tmux, ls=eza, cat=bat, cd=z (via zoxide)
+- Plugins: zsh-autosuggestions (history+completion strategy), zsh-syntax-highlighting (currently commented out)
+
+### Starship Prompt
+
+Single-line format that shows:
+- Username@hostname (SSH only)
+- Current directory (truncated at 3 levels)
+- Git branch and status (modified, stashed, deleted, untracked, conflicted)
+- Language versions: node, rust, go, python
+- Command duration (for commands >2 seconds)
+- Memory usage (currently disabled, 85% threshold)
+- Background jobs
+
+Colors use the cornellsh palette: pink (#ff66b2), cyan (#00bfff), green (#00cc00), purple (#9932cc), yellow (#ffff00), red (#ff0000).
+
+### Tmux
+
+- Prefix: Ctrl+a (rebinds Ctrl+a to send prefix)
+- Navigation: Vim-style h/j/k/l for panes, Ctrl+h/j/k/l for smart pane switching
+- Panes: v=horizontal split, s=vertical split, H/J/K/L resize
+- Windows: c=new window, z=zoom pane, x=kill pane, X=kill window
+- Status bar: Bottom position, 1-second interval, shows session name, time, and window list
+- Colors: Black background with pink prefix indicators, purple active window
+- Reload: Prefix+r reloads config
+- Mouse: Enabled for pane selection and resizing
+
+### Ghostty Terminal
+
+Config location: `~/.config/ghostty/config`
+
+- Font: 12pt, Inter Variable for UI, Cascadia Code NF for monospace
+- Window: No decoration, 12px padding, 32px blur radius
+- Cursor: Block style, blinking
+- Scrollback: 3023 lines
+- Theme: cornellsh (OLED black #000000 with pastel palette)
+- Keybindings: Ctrl+Shift+N (new window), Ctrl+T (new tab), Ctrl+Plus/Minus (font size)
+- Shell integration: Auto-detected
+
+### DankMaterialShell
+
+Config location: `~/.config/DankMaterialShell/settings.json`
+
+Wayland shell (supports Niri, Hyprland) with:
+- Custom cornellsh.json theme copied to `~/Documents/DankMaterialShell/cornellsh.json`
+- Control center with volume, brightness, WiFi, Bluetooth widgets
+- Workspace switcher, system tray, weather, clock
+- Material 3 color scheme with 90% transparency
+- No dock (disabled by default)
+
+### OpenCode
+
+Config location: `~/.config/opencode/opencode.json`
+
+AI coding assistant configuration:
+- Plugins: `opencode-gemini-auth`, `@zenobius/opencode-skillful`
+- Theme: `cornell.sh.json` (matches terminal/shell)
+- Permissions: All operations allowed without prompts
+- Optional install (prompted during main install)
+
+### Notebook Setup (setup_notebook.sh)
+
+Target hardware: Intel 12th Gen (Alder Lake) laptops
+
+Installed packages:
+- thermald: CPU thermal management
+- tlp: Power management with performance/powersave governors
+- powertop: Power consumption monitoring
+
+Configurations:
+- **TLP** (/etc/tlp.d/99-optimization.conf): Performance mode on AC, powersave on battery, no turbo on battery, 75-80% battery charge threshold
+- **ZRAM** (/etc/systemd/zram-generator.conf): Compressed swap using zstd, up to 8GB or RAM size
+- **VA-API** (~/.config/environment.d/hw-accel.conf): Hardware acceleration for Intel iGPU (LIBVA_DRIVER_NAME=iHD, MESA_LOADER_DRIVER_OVERRIDE=iris)
+
+Services enabled: thermald, tlp, systemd-zram-setup
+
+### WSL2 Setup (wsl-setup.sh)
+
+Optimizations for Windows Subsystem for Linux:
+
+**Time sync fix:**
+- Disables systemd-timesyncd (WSL2 syncs time with Windows automatically)
+- Prevents clock drift issues
+
+**WSL config** (/etc/wsl.conf):
+- Auto-mount Windows drives with metadata, umask=22, fmask=11 (allows chmod/chown on Windows files)
+- systemd enabled
+- Auto-generates /etc/hosts and /etc/resolv.conf
+
+**.wslconfig** (~/.wslconfig, on Windows side):
+- Memory: 8GB limit
+- CPUs: 4 cores
+- Swap: 2GB
+
+The script tries to detect your Windows username and copy .wslconfig automatically. If it fails, copy `wsl/.wslconfig` manually to `%UserProfile%\.wslconfig` on Windows.
+
+After running wsl-setup.sh, restart WSL2 with `wsl --shutdown` in PowerShell to apply changes.
+
+## Notes
+
+- Config files symlinked from repo, so changes in repo take effect after reload
+- Both `~/.tmux.conf` and `~/.config/tmux/tmux.conf` point to repo's `.tmux.conf` (tmux 3.0+ prefers XDG path)
+- Syntax highlighting in zsh is commented out in current version
+- Starship's git metrics and memory usage modules are disabled
+- Ghostty theme uses 16-color palette compatible with most terminals
+
+## Requirements
+
+- **Arch Linux or Debian/Ubuntu**: apt or pacman package manager
+- **Ghostty**: GPU-accelerated terminal emulator
+- **Zsh**: Default shell
+- **Starship**: Prompt engine
+- Optional: niri or Hyprland (for DankMaterialShell shell integration)
+- Notebook setup targets Intel 12th Gen only; other hardware may need different TLP/VA-API configs

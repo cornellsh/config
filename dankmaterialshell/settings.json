@@ -1,9 +1,9 @@
 {
-  "currentThemeName": "cornellsh",
+  "currentThemeName": "custom",
   "currentThemeCategory": "custom",
   "customThemeFile": "/home/user/Documents/DankMaterialShell/cornellsh.json",
   "registryThemeVariants": {},
-  "matugenScheme": "scheme-expressive",
+  "matugenScheme": "scheme-tonal-spot",
   "runUserMatugenTemplates": true,
   "matugenTargetMonitor": "",
   "popupTransparency": 0.9,

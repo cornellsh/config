@@ -94,6 +94,7 @@ CONFIG_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # 4. Perform Links
 backup_and_link "$CONFIG_DIR/.tmux.conf" "$HOME/.tmux.conf"
+backup_and_link "$CONFIG_DIR/.tmux.conf" "$HOME/.config/tmux/tmux.conf"
 backup_and_link "$CONFIG_DIR/.zshrc" "$HOME/.zshrc"
 backup_and_link "$CONFIG_DIR/starship.toml" "$HOME/.config/starship.toml"
 

@@ -1,7 +1,8 @@
 [wsl2]
 # Limit resource usage to avoid starving the host.
-# IMPORTANT: Adjust these values based on your host machine's hardware!
-# If you have 16GB RAM, 8GB for WSL is reasonable. If you have 32GB, you might want 16GB.
+# IMPORTANT: Carefully adjust these values based on your host machine's hardware for optimal WSL2 performance and stability!
+# Insufficient resources can lead to slowdowns, while excessive allocation can starve your host OS.
+# For example, if you have 16GB RAM, allocating 8GB for WSL is a reasonable starting point. For 32GB RAM, consider 16GB.
 memory=8GB
 processors=4
 swap=2GB

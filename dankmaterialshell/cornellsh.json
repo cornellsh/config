@@ -1,7 +1,7 @@
 {
   "dark": {
     "name": "CornellSH Dark",
-    "primary": "#75b5e6",
+    "primary": "#a3bce6",
     "primaryText": "#000000",
     "primaryContainer": "#ab84e0",
     "secondary": "#ab84e0",
@@ -11,19 +11,19 @@
     "surfaceVariantText": "#e0e0e0",
     "surfaceTint": "#e6638a",
     "background": "#000000",
-    "backgroundText": "#e0e0e0",
-    "outline": "#404040",
-    "surfaceContainer": "#000000",
-    "surfaceContainerHigh": "#0a0a0a",
-    "surfaceContainerHighest": "#0a0a0a",
-    "error": "#e64d4d",
-    "warning": "#e6d26f",
-    "info": "#75b5e6",
+        "backgroundText": "#e0e0e0",
+        "outline": "#404040",
+        "surfaceContainer": "#000000",
+        "surfaceContainerHigh": "#0a0a0a",
+        "surfaceContainerHighest": "#0a0a0a",
+        "error": "#e64d4d",
+        "warning": "#e6d26f",
+        "info": "#a3bce6",
     "matugen_type": "scheme-expressive"
   },
-  "light": {
-    "name": "CornellSH Light",
-    "primary": "#75b5e6",
+      "light": {
+        "name": "CornellSH Light",
+        "primary": "#a3bce6",
     "primaryText": "#FFFFFF",
     "primaryContainer": "#ab84e0",
     "secondary": "#ab84e0",
@@ -38,9 +38,9 @@
     "surfaceContainer": "#FFFFFF",
     "surfaceContainerHigh": "#f0f0f0",
     "surfaceContainerHighest": "#f0f0f0",
-    "error": "#e64d4d",
-    "warning": "#e6d26f",
-    "info": "#75b5e6",
-    "matugen_type": "scheme-expressive"
-  }
+        "error": "#e64d4d",
+        "warning": "#e6d26f",
+        "info": "#a3bce6",
+        "matugen_type": "scheme-expressive"
+      }
 }

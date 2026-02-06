@@ -150,8 +150,8 @@ fi
 # Syntax Highlighting (Must be last)
 if [[ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
     # Debian / Ubuntu
-    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    # source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 elif [[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
     # Arch Linux
-    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    # source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi

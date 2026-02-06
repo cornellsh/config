@@ -78,13 +78,13 @@ untracked = "untracked "
 conflicted = "conflict "
 
 [git_metrics]
-disabled = false
+disabled = true
 added_style = "bold #42be65"
 deleted_style = "bold #ff5555"
 format = "([+$added]($added_style) )([-$deleted]($deleted_style) )"
 
 [memory_usage]
-disabled = false
+disabled = true
 threshold = 85
 symbol = "mem:"
 style = "bold #ff5555"
