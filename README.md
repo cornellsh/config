@@ -10,6 +10,7 @@ Personal dotfiles and configuration for reproducing my Linux environment across 
 - **Ghostty Terminal** (~/.config/ghostty): Terminal config with cornellsh theme, 12pt font
 - **DankMaterialShell** (~/.config/DankMaterialShell): Wayland shell with cornellsh theme integration
 - **OpenCode** (~/.config/opencode): AI coding assistant config with cornell.sh theme and auto-permissions
+- **Themes** (themes-setup.sh): GTK, icons, cursor, and SDDM theme setup (Mojave, Papirus, macOS cursors, where-is-my-sddm-theme)
 - **Notebook Setup** (setup_notebook.sh): Power management for Intel 12th Gen (TLP, thermald, ZRAM)
 - **WSL2 Setup** (wsl-setup.sh): Windows Subsystem for Linux optimizations
 
@@ -29,6 +30,26 @@ The install script:
 - Installs: git, tmux, zsh, curl, ghostty, zsh-autosuggestions, zsh-syntax-highlighting, starship
 - Asks about WSL2 optimizations if running in WSL
 - Asks about OpenCode theme installation
+
+## Theme Setup (themes-setup.sh)
+
+Optional script for visual customization:
+
+```bash
+./themes-setup.sh
+```
+
+This script:
+- Installs Mojave GTK theme (dark macOS-inspired)
+- Installs Papirus icon theme (dark variant for OLED)
+- Installs macOS-Tahoe cursors (exact macOS clone)
+- Installs where-is-my-sddm-theme (minimalist SDDM theme)
+- Configures GTK settings (via gsettings)
+- Configures SDDM to use where-is-my-sddm-theme
+- Removes niri compositor from SDDM config (prevents keybinding overlay on login screen)
+- Optionally installs nwg-look (GTK theme switcher for Wayland)
+
+Requires: yay (AUR helper), Arch Linux
 
 After installation, restart your shell or run `source ~/.zshrc`.
 
@@ -99,6 +120,36 @@ AI coding assistant configuration:
 - Permissions: All operations allowed without prompts
 - Optional install (prompted during main install)
 
+### Themes (themes-setup.sh)
+
+Visual theme configuration for GTK applications, icons, cursors, and login screen:
+
+**Installed Packages:**
+- mojave-gtk-theme: macOS Mojave-inspired GTK3/4 theme (AUR)
+- papirus-icon-theme: Flat, pixel-perfect icons with dark variant (official repos)
+- macOS cursors: Exact macOS cursor clone (macOS-Tahoe, AUR)
+- where-is-my-sddm-theme: Minimalist SDDM login theme (AUR)
+- nwg-look: GTK theme switcher for Wayland (optional, AUR)
+
+**Configured via gsettings:**
+- GTK Theme: Mojave-Dark
+- Icon Theme: Papirus-Dark (OLED-optimized)
+- Cursor Theme: macos-tahoe-cursor
+
+**SDDM Configuration:**
+- Theme: where_is_my_sddm_theme (set in `/etc/sddm.conf.d/theme.conf`)
+- Fix: Removes `CompositorCommand=niri` from `/etc/sddm.conf.d/niri.conf` to prevent niri keybinding overlay on login screen
+
+**Visual Style:**
+- Elegant, dark macOS-inspired aesthetics
+- True black backgrounds (#000000) for OLED screens
+- High contrast with refined details
+- Minimalist login screen with clean design
+- macOS-Tahoe cursor for exact macOS feel
+
+To apply GTK theme changes: restart session or run `nwg-look`
+To apply SDDM theme changes: `sudo systemctl restart sddm`
+
 ### Notebook Setup (setup_notebook.sh)
 
 Target hardware: Intel 12th Gen (Alder Lake) laptops
@@ -110,10 +161,18 @@ Installed packages:
 
 Configurations:
 - **TLP** (/etc/tlp.d/99-optimization.conf): Performance mode on AC, powersave on battery, no turbo on battery, 75-80% battery charge threshold
+- **TLP Bluetooth** (/etc/tlp.d/99-bluetooth.conf): Prevents Bluetooth from being blocked on startup (TLP blocks by default for battery saving)
 - **ZRAM** (/etc/systemd/zram-generator.conf): Compressed swap using zstd, up to 8GB or RAM size
 - **VA-API** (~/.config/environment.d/hw-accel.conf): Hardware acceleration for Intel iGPU (LIBVA_DRIVER_NAME=iHD, MESA_LOADER_DRIVER_OVERRIDE=iris)
 
-Services enabled: thermald, tlp, systemd-zram-setup
+Services enabled: thermald, tlp, systemd-zram-setup, system-bluetooth-unblock
+
+**Bluetooth Fix:**
+TLP blocks Bluetooth on startup to save battery power. This setup:
+- Configures TLP to not block Bluetooth
+- Installs systemd service to unblock Bluetooth after Bluetooth starts
+- Keeps Bluetooth unblocked across reboots
+- Allows DankMaterialShell and other tools to use Bluetooth normally
 
 ### WSL2 Setup (wsl-setup.sh)
 
@@ -152,4 +211,5 @@ After running wsl-setup.sh, restart WSL2 with `wsl --shutdown` in PowerShell to 
 - **Zsh**: Default shell
 - **Starship**: Prompt engine
 - Optional: niri or Hyprland (for DankMaterialShell shell integration)
+- Themes setup requires: Arch Linux, yay (AUR helper)
 - Notebook setup targets Intel 12th Gen only; other hardware may need different TLP/VA-API configs

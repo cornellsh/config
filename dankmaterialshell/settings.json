@@ -180,10 +180,10 @@
   "weatherEnabled": true,
   "networkPreference": "wifi",
   "vpnLastConnected": "",
-  "iconTheme": "kora",
+  "iconTheme": "Papirus-Dark",
   "cursorSettings": {
-    "theme": "Breeze_Light",
-    "size": 25,
+    "theme": "macos-tahoe-cursor",
+    "size": 32,
     "niri": {
       "hideWhenTyping": false,
       "hideAfterInactiveMs": 0

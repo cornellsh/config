@@ -1,0 +1,13 @@
+# Systemd service to unblock Bluetooth on startup
+# Prevents TLP from blocking Bluetooth
+
+[Unit]
+Description=Unblock Bluetooth on startup
+After=bluetooth.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/rfkill unblock bluetooth
+
+[Install]
+WantedBy=multi-user.target
