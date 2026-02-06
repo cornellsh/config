@@ -1,27 +1,27 @@
 # unix-config
 
-Dotfiles for Zsh, Tmux, and Starship. Clone this to get a working shell environment on any machine, with optional WSL2 tweaks.
+Zsh, Tmux, and Starship config. Clone to get a working shell on any machine, with WSL2 tweaks if detected.
 
-## What's in here
+## What you get
 
-**Zsh configuration** (.zshrc)
-- Zsh with autosuggestions and syntax highlighting
+**Zsh** (.zshrc)
+- Autosuggestions and syntax highlighting
 - Aliases for modern tools (eza, bat, ripgrep)
-- History sharing across sessions
+- History shared across sessions
 
 **Starship prompt** (starship.toml)
-- Single-line format to save vertical space
-- Shows: username (ssh only), hostname (ssh only), git branch/status, language versions (node, rust, go, python), memory usage, command duration
-- Vibrant pastel colors on black background
+- Single line, saves vertical space
+- Shows: username/host (ssh only), git branch/status, language versions (node, rust, go, python), memory usage, command duration
+- Pastel colors on black
 
 **Tmux** (.tmux.conf)
 - Ctrl+a prefix
-- Clean status bar with time and session name
-- Standard vim-style pane navigation (h/j/k/l)
+- Status bar with time and session name
+- Vim-style pane navigation (h/j/k/l)
 
-**Utilities assumed:**
-- `eza` - Modern ls replacement
-- `bat` - Modern cat replacement
+**Tools you need installed**
+- `eza` - Modern ls
+- `bat` - Modern cat
 - `zoxide` - Better cd
 - `fzf` - Fuzzy finder
 - `ripgrep` - Fast grep
@@ -34,18 +34,18 @@ cd ~/work/config
 ./install.sh
 ```
 
-The install script backs up existing files to `~/.config-backup/` before symlinking.
+Existing files get backed up to `~/.config-backup/` before symlinking.
 
 ## WSL2
 
-If the install script detects WSL2, it offers to run `wsl-setup.sh` which:
-- Disables `systemd-timesyncd` to fix time drift
-- Writes `/etc/wsl.conf` for better filesystem performance
-- Creates `.wslconfig` in your Windows home directory to limit WSL RAM/CPU
+If WSL2 is detected, the script offers to run `wsl-setup.sh`:
+- Disables `systemd-timesyncd` (fixes time drift)
+- Writes `/etc/wsl.conf` (filesystem performance)
+- Creates `.wslconfig` (limits WSL RAM/CPU)
 
-Time drift on WSL2 is annoying - the system clock can drift by minutes if Windows is suspended. Disabling the systemd time sync and letting Windows handle it is the workaround.
+WSL2 time drift sucks - clock can drift by minutes when Windows is suspended. The workaround is letting Windows handle time sync.
 
-## Tmux keybindings
+## Tmux
 
 | Key | Action |
 |-----|--------|
@@ -56,9 +56,9 @@ Time drift on WSL2 is annoying - the system clock can drift by minutes if Window
 | `H` `J` `K` `L` | Resize panes |
 | `C-l` | Clear screen and scrollback |
 
-Prefix is Ctrl+a (rebind from Ctrl+b).
+Prefix is Ctrl+a (not Ctrl+b).
 
-## Shell aliases
+## Aliases
 
 | Alias | Command |
 |-------|---------|
@@ -67,20 +67,20 @@ Prefix is Ctrl+a (rebind from Ctrl+b).
 | `G` | `| grep` |
 | `L` | `| less` |
 
-Copy and move are interactive (`cp -i`, `mv -i`) by default.
+`cp` and `mv` are interactive (`-i`) by default.
 
 ## OpenCode
 
-OpenCode configuration is included if you use that tool. The config enables:
+If you use OpenCode, the config is included:
 
 **Plugins**
-- `opencode-gemini-auth` - Google authentication for AI features
+- `opencode-gemini-auth` - Google auth for AI features
 - `@zenobius/opencode-skillful` - Enhanced skill system
 
 **Permissions**
-- All operations allowed by default (no prompts for file access)
+- All operations allowed (no file access prompts)
 
 **Theme**
-- `cornell.sh` - OLED-optimized theme matching the Starship prompt colors
+- `cornell.sh` - OLED theme matching Starship colors
 
-Install script asks whether to install OpenCode config and theme to `~/.config/opencode/`. Backs up existing `opencode.json` before replacing it.
+The install script asks whether to install to `~/.config/opencode/`. Existing `opencode.json` gets backed up.
