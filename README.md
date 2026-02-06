@@ -1,86 +1,76 @@
-# unix-config
+# unix-config: Your Consistent, OLED-Optimized Linux Environment
 
-Zsh, Tmux, and Starship config. Clone to get a working shell on any machine, with WSL2 tweaks if detected.
+Tired of a disjointed terminal experience across your machines? This repository provides a cohesive, OLED-friendly configuration for Zsh, Tmux, Starship, Ghostty, and DankMaterialShell. Get a beautiful, functional, and consistent shell experience tailored for everyday Linux use, whether you're on a powerful Arch notebook or a snappy WSL2 setup.
 
-## What you get
+## What's Inside?
 
-**Zsh** (.zshrc)
-- Autosuggestions and syntax highlighting
-- Aliases for modern tools (eza, bat, ripgrep)
-- History shared across sessions
+We focus on a clean, efficient, and visually appealing setup. Every component here is tuned for:
 
-**Starship prompt** (starship.toml)
-- Single line, saves vertical space
-- Shows: username/host (ssh only), git branch/status, language versions (node, rust, go, python), memory usage, command duration
-- Pastel colors on black
+-   **Performance:** Fast response times and minimal resource usage.
+-   **Consistency:** A unified `cornellsh` theme ties everything together visually.
+-   **OLED Optimization:** True black backgrounds and vibrant pastels save power and look stunning on OLED displays.
+-   **Usability:** Sensible defaults and quality-of-life improvements without unnecessary bloat.
 
-**Tmux** (.tmux.conf)
-- Ctrl+a prefix
-- Status bar with time and session name
-- Vim-style pane navigation (h/j/k/l)
+### Components & Highlights:
 
-**Tools you need installed**
-- `eza` - Modern ls
-- `bat` - Modern cat
-- `zoxide` - Better cd
-- `fzf` - Fuzzy finder
-- `ripgrep` - Fast grep
+#### **Zsh** (`.zshrc`)
+Your command line, supercharged.
+-   **Smart Suggestions:** Autocomplete commands as you type with history and completion strategies.
+-   **Syntax Highlighting:** Instant visual feedback for commands, preventing typos.
+-   **Modern Aliases:** Shortcuts for powerful tools like `eza` (modern `ls`), `bat` (modern `cat`), `zoxide` (smarter `cd`), `fzf` (fuzzy finder), and `ripgrep` (blazing-fast `grep`).
+-   **Shared History:** Seamlessly access your command history across all sessions.
 
-## Install
+#### **Starship Prompt** (`starship.toml`)
+A minimalist, yet informative prompt.
+-   **Single Line Efficiency:** Saves vertical screen space for your commands.
+-   **Context-Aware:** Displays crucial information only when relevant:
+    -   `username@hostname` (SSH sessions only)
+    -   Current Git branch and status
+    -   Active language versions (Node.js, Rust, Go, Python)
+    -   Memory usage (configurable threshold)
+    -   Command duration
+-   **Vibrant `cornellsh` Colors:** Beautiful pastel colors on a true black background for an OLED-optimized look.
+
+#### **Tmux** (`.tmux.conf`)
+Your persistent, multi-pane workspace.
+-   **Familiar Prefix:** Uses `Ctrl+a` (instead of `Ctrl+b`) for muscle memory.
+-   **Intuitive Navigation:** Vim-style `h/j/k/l` for quick pane switching.
+-   **Informative Status Bar:** Always see the time, active session name, and other useful indicators.
+-   **Quick Reload:** Hit `Prefix + r` to instantly apply config changes.
+
+#### **Ghostty Terminal** (`~/.config/ghostty/*`)
+A fast, modern GPU-accelerated terminal.
+-   **OLED-Optimized `cornellsh` Theme:** True black background and carefully selected pastel colors for crisp text and power efficiency.
+-   Seamless integration with your shell and prompt.
+
+#### **DankMaterialShell** (`~/.config/DankMaterialShell/*`, `~/Documents/DankMaterialShell/cornellsh.json`)
+A dynamic shell experience, now with consistent theming.
+-   **Custom `cornellsh.json` Theme:** Ensures UI elements, popups, and widgets align with the overall `cornellsh` aesthetic, featuring OLED-optimized colors.
+
+#### **OpenCode** (`~/.config/opencode/*`)
+Your coding companion, visually consistent.
+-   **`cornell.sh` Theme:** Matches your terminal and shell for a harmonious coding environment.
+-   Pre-configured plugins for Gemini AI features and an enhanced skill system.
+-   Permission setup allowing seamless operations without constant prompts.
+
+### Ready to Install?
+
+Getting set up is straightforward. The `install.sh` script automates most of the heavy lifting for you.
 
 ```bash
-git clone https://github.com/cornellsh/unix-config ~/work/config
-cd ~/work/config
+git clone https://github.com/cornellsh/unix-config ~/my_dotfiles # or wherever you prefer
+cd ~/my_dotfiles
 ./install.sh
 ```
 
-Existing files get backed up to `~/.config-backup/` before symlinking.
+-   **Safe:** Existing configuration files are automatically backed up to `~/.config-backup/` before symlinking.
+-   **Smart:** The script detects your OS (Arch/Debian) to install dependencies and handles WSL2-specific optimizations if needed.
 
-## WSL2
+### Special Notes for WSL2 Users
 
-If WSL2 is detected, the script offers to run `wsl-setup.sh`:
-- Disables `systemd-timesyncd` (fixes time drift)
-- Writes `/etc/wsl.conf` (filesystem performance)
-- Creates `.wslconfig` (limits WSL RAM/CPU)
+If you're running on WSL2, our script offers specific tweaks to enhance your experience:
 
-WSL2 time drift sucks - clock can drift by minutes when Windows is suspended. The workaround is letting Windows handle time sync.
+-   **Time Drift Fix:** Disables `systemd-timesyncd` to prevent annoying clock drift.
+-   **Performance & Resource Management:** Configures `/etc/wsl.conf` for optimized filesystem performance and creates `.wslconfig` to limit WSL RAM/CPU usage, ensuring a smoother ride.
 
-## Tmux
-
-| Key | Action |
-|-----|--------|
-| `r` | Reload config |
-| `b` | Toggle status bar |
-| `v` / `s` | Split vertical / horizontal |
-| `h` `j` `k` `l` | Move between panes |
-| `H` `J` `K` `L` | Resize panes |
-| `C-l` | Clear screen and scrollback |
-
-Prefix is Ctrl+a (not Ctrl+b).
-
-## Aliases
-
-| Alias | Command |
-|-------|---------|
-| `l` / `ll` | `eza -lah` / `eza -lah --git` |
-| `g` / `gs` | `git` / `git status` |
-| `G` | `| grep` |
-| `L` | `| less` |
-
-`cp` and `mv` are interactive (`-i`) by default.
-
-## OpenCode
-
-If you use OpenCode, the config is included:
-
-**Plugins**
-- `opencode-gemini-auth` - Google auth for AI features
-- `@zenobius/opencode-skillful` - Enhanced skill system
-
-**Permissions**
-- All operations allowed (no file access prompts)
-
-**Theme**
-- `cornell.sh` - OLED theme matching Starship colors
-
-The install script asks whether to install to `~/.config/opencode/`. Existing `opencode.json` gets backed up.
+Give it a try! If you find this configuration useful, consider giving the repo a star. Your feedback is always welcome!
