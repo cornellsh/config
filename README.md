@@ -81,4 +81,9 @@ The prompt uses a vibrant pastel palette on pure black:
 - Red (#ff5555) - Errors, git status
 - Yellow (#ffff80) - Warnings, timing
 
-OpenCode theme (`cornell.sh`) is included at `.opencode/themes/cornell.sh.json` if you use that tool.
+## OpenCode
+
+OpenCode config and the `cornell.sh` OLED-optimized theme are included. The install script asks whether to install them globally.
+
+The theme uses the same pastel colors with OLED-friendly brightness adjustments.
+

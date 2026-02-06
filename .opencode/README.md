@@ -1,44 +1,39 @@
-# OpenCode Integration
+# OpenCode
 
-This repository includes OpenCode AI assistant integration with a custom theme that matches the vibrant pastel aesthetic of the unix-config setup.
+This directory contains the actual OpenCode configuration files that should be installed to `~/.config/opencode/`.
+
+## Contents
+
+- `opencode.json` - Main OpenCode configuration
+- `themes/cornell.sh.json` - OLED-optimized vibrant pastel theme
+
+## Installation
+
+Run the install script:
+```bash
+./install.sh
+```
+
+The script will prompt to install OpenCode config and theme.
 
 ## Theme: cornell.sh
 
-The `cornell.sh` theme is optimized for OLED displays and matches the color scheme used throughout the unix-config:
+OLED-optimized vibrant pastel theme matching the unix-config aesthetic:
 
-- **Background**: Pure black (#000000) - OLED optimal (pixels OFF)
-- **Text**: Dimmed white (#e0e0e0) - Reduces OLED burn-in risk
-- **Accent Colors**: Vibrant pastels at 90% brightness
-  - Pink (#e6638a) - Active elements, borders
-  - Purple (#ab84e0) - Git branches, host info
-  - Cyan (#75b5e6) - Username, directory, primary
-  - Green (#3bab5b) - Success indicators
-  - Red (#e64d4d) - Errors, git status
-  - Yellow (#e6d26f) - Warnings, timing
+- Background: Pure black (#000000) - OLED optimal
+- Text: Dimmed white (#e0e0e0) - Reduces OLED burn-in risk
+- Accent colors at 90% brightness for OLED longevity
+- Matches the Starship prompt color scheme
 
-## Configuration
+## Manual Installation
 
-The `opencode.json` file in the repository root configures OpenCode with:
+To install without running the full setup:
 
-- Custom commands for testing shell scripts and config files
-- Shell script linting with shellcheck
-- Zsh and tmux syntax validation
-- Shfmt for shell script formatting
-- Bash language server for IntelliSense
-
-## Usage
-
-When working in this repository, OpenCode will automatically use the `cornell.sh` theme and the repository-specific configuration.
-
-To apply the theme globally:
 ```bash
-opencode config set theme cornell.sh
+# Install theme
+cp .opencode/themes/cornell.sh.json ~/.config/opencode/themes/cornell.sh.json
+
+# Install config (backs up existing)
+mv ~/.config/opencode/opencode.json ~/.config/opencode/opencode.json.backup
+cp opencode.json ~/.config/opencode/opencode.json
 ```
-
-## Theme Location
-
-The theme is available in two locations:
-1. Project-specific: `.opencode/themes/cornell.sh.json` (this repository)
-2. Global: `~/.config/opencode/themes/cornell.sh.json`
-
-The project-specific theme takes precedence when working in this directory.

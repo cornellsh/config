@@ -78,27 +78,20 @@ if [ -f "$CONFIG_DIR/opencode.json" ]; then
     read -p "Install OpenCode theme and config? (y/n) " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-        # Install theme
         mkdir -p "$HOME/.config/opencode/themes"
+
         if [ -f "$CONFIG_DIR/.opencode/themes/cornell.sh.json" ]; then
             cp "$CONFIG_DIR/.opencode/themes/cornell.sh.json" "$HOME/.config/opencode/themes/cornell.sh.json"
-            echo -e "${GREEN}[OK] OpenCode theme installed to ~/.config/opencode/themes/cornell.sh.json${NC}"
+            echo -e "${GREEN}[OK] OpenCode theme installed${NC}"
         fi
 
-        # Ask about config merge
         if [ -f "$HOME/.config/opencode/opencode.json" ]; then
-            read -p "Merge opencode.json with existing config? (backup current) (y/n) " -n 1 -r
-            echo
-            if [[ $REPLY =~ ^[Yy]$ ]]; then
-                mv "$HOME/.config/opencode/opencode.json" "$HOME/.config/opencode/opencode.json.backup"
-                echo -e "${YELLOW}[WARN] Backed up existing opencode.json${NC}"
-                cp "$CONFIG_DIR/opencode.json" "$HOME/.config/opencode/opencode.json"
-                echo -e "${GREEN}[OK] OpenCode config installed${NC}"
-            fi
-        else
-            cp "$CONFIG_DIR/opencode.json" "$HOME/.config/opencode/opencode.json"
-            echo -e "${GREEN}[OK] OpenCode config installed${NC}"
+            mv "$HOME/.config/opencode/opencode.json" "$HOME/.config/opencode/opencode.json.backup"
+            echo -e "${YELLOW}[WARN] Backed up existing opencode.json${NC}"
         fi
+
+        cp "$CONFIG_DIR/opencode.json" "$HOME/.config/opencode/opencode.json"
+        echo -e "${GREEN}[OK] OpenCode config installed${NC}"
     fi
 fi
 
