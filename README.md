@@ -36,8 +36,6 @@ cd ~/work/config
 
 The install script backs up existing files to `~/.config-backup/` before symlinking.
 
-If OpenCode config is found, the script asks whether to install the `cornell.sh` theme and config globally.
-
 ## WSL2
 
 If the install script detects WSL2, it offers to run `wsl-setup.sh` which:
@@ -71,19 +69,18 @@ Prefix is Ctrl+a (rebind from Ctrl+b).
 
 Copy and move are interactive (`cp -i`, `mv -i`) by default.
 
-## Color scheme
-
-The prompt uses a vibrant pastel palette on pure black:
-- Pink (#ff6e99) - Active elements
-- Purple (#bd93f9) - Git branch, hostname
-- Cyan (#5af7ff) - Username, directory
-- Green (#42be65) - Success, git added
-- Red (#ff5555) - Errors, git status
-- Yellow (#ffff80) - Warnings, timing
-
 ## OpenCode
 
-OpenCode config and the `cornell.sh` OLED-optimized theme are included. The install script asks whether to install them globally.
+OpenCode configuration is included if you use that tool. The config enables:
 
-The theme uses the same pastel colors with OLED-friendly brightness adjustments.
+**Plugins**
+- `opencode-gemini-auth` - Google authentication for AI features
+- `@zenobius/opencode-skillful` - Enhanced skill system
 
+**Permissions**
+- All operations allowed by default (no prompts for file access)
+
+**Theme**
+- `cornell.sh` - OLED-optimized theme matching the Starship prompt colors
+
+Install script asks whether to install OpenCode config and theme to `~/.config/opencode/`. Backs up existing `opencode.json` before replacing it.
