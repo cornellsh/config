@@ -32,6 +32,30 @@ check_dependency "tmux"
 check_dependency "zsh"
 check_dependency "curl"
 
+# 1.1 Install Zsh Plugins (Autosuggestions & Syntax Highlighting)
+echo -e "${BLUE}[INFO] Checking Zsh plugins...${NC}"
+if [ -f /etc/debian_version ]; then
+    # Debian/Ubuntu
+    if ! dpkg -s zsh-autosuggestions &> /dev/null; then
+        echo "[INFO] Installing zsh-autosuggestions..."
+        sudo apt-get install -y zsh-autosuggestions
+    fi
+    if ! dpkg -s zsh-syntax-highlighting &> /dev/null; then
+        echo "[INFO] Installing zsh-syntax-highlighting..."
+        sudo apt-get install -y zsh-syntax-highlighting
+    fi
+elif [ -f /etc/arch-release ]; then
+    # Arch Linux
+    if ! pacman -Qi zsh-autosuggestions &> /dev/null; then
+        echo "[INFO] Installing zsh-autosuggestions..."
+        sudo pacman -S --noconfirm zsh-autosuggestions
+    fi
+    if ! pacman -Qi zsh-syntax-highlighting &> /dev/null; then
+        echo "[INFO] Installing zsh-syntax-highlighting..."
+        sudo pacman -S --noconfirm zsh-syntax-highlighting
+    fi
+fi
+
 # 2. Install Starship if missing
 if ! command -v starship &> /dev/null; then
     echo -e "${BLUE}[INFO] Installing Starship prompt...${NC}"
